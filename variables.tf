@@ -12,13 +12,3 @@ variable "aws_region" {
     default                         = "us-west-2"  
 }
 
-variable "terraform_s3_backend" {
-    type = object({
-        namespace                   = string
-        environment                 = string
-        stage                       = string
-        name                        = string
-        attributes                  = list(string)
-    })
-  
-}
