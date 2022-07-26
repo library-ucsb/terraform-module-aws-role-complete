@@ -8,7 +8,10 @@ resource "aws_iam_role" "assume_role" {
 
 data "aws_iam_policy_document" "assume_role_trust_policy" {
   statement {
-    actions                         = ["sts:AssumeRole"]
+    actions                         = [
+      "sts:AssumeRole",
+      "sts:TagSession"
+    ]
     principals {
       type                          = "AWS"
       identifiers                   = ["arn:aws:iam::${data.aws_caller_identity.source.account_id}:root"]
@@ -34,7 +37,8 @@ resource "aws_iam_group" "iam_group" {
 data "aws_iam_policy_document" "assume_role_group_policy" {
     statement {
       actions = [
-        "sts:AssumeRole"
+        "sts:AssumeRole",
+        "sts:TagSession"
       ]
       resources = [
         aws_iam_role.assume_role.arn
